@@ -1,0 +1,32 @@
+p#notice = notice
+h1 Pozt
+p
+  strong Title:
+  = @pozt.title
+p
+  strong Body:
+  = @pozt.body
+p
+  strong User:
+  = @pozt.user_id
+p
+  h2 Comments
+  = render @pozt.comments
+p
+h2 Leave your comment
+p
+
+  = form_for ([ @pozt, @pozt.comments.build ]) do |f|
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :body
+      = f.text_area :body
+    .actions = f.submit
+
+
+- if can? :update, @pozt
+  => link_to 'Edit', edit_pozt_path(@pozt)
+'|
+=< link_to 'Back', pozts_path

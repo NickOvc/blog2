@@ -1,0 +1,37 @@
+h1 Listing pozts
+
+table
+  thead
+    tr
+      th Title
+      th Body
+      th User id
+      th Comments
+      th
+      th
+      th
+
+  tbody
+    - @pozts.each do |pozt|
+      tr
+        td = pozt.title
+        td = truncate(pozt.body, length: 10)
+        td = pozt.user_id
+        td = pozt.comments.count
+        td = link_to 'Show', pozt
+        -if can? :update, pozt
+          td = link_to 'Edit', edit_pozt_path(pozt)
+        -if can? :destroy, pozt
+          td = link_to 'Destroy', pozt, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+
+p
+= search_form_for @q do |f|
+  =f.label :title_cont, "Search Pozt titlez"
+  =f.search_field :title_cont, placeholder: "Search..."
+p
+= link_to 'New Pozt', new_pozt_path
+p
+= link_to 'Main page', home_index_path

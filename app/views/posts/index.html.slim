@@ -1,0 +1,13 @@
+=link_to 'Create New Post', new_post_path
+table
+  tr
+    th Title
+    th Text
+    th Show?
+    = @posts.each do |post|
+      tr
+        td = post.title
+        td = post.text
+        td = link_to 'Show', post_path(post)
+        end
+
